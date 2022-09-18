@@ -47,6 +47,8 @@ local Framework = {}; Framework.__index = Framework; do
     end
 end
 
+_G.BoxFilled = false
+
 -- Main
 if not isfolder("ESP") then makefolder("ESP") end
 if not isfolder("ESP/assets") then makefolder("ESP/assets") end
@@ -662,7 +664,7 @@ do -- ESP Functions
             self:GetObject(Instance):Destroy()
         end
         local Components = Object.Components
-        Components.Box = Framework:Draw("Square", {Thickness = 1, ZIndex = 2, Filled = true})
+        Components.Box = Framework:Draw("Square", {Thickness = 1, ZIndex = 2, Filled = _G.BoxFilled})
         Components.Box_Outline = Framework:Draw("Square", {Thickness = 3, ZIndex = 1})
         Components.Healthbar = Framework:Draw("Square", {Thickness = 1, ZIndex = 2, Filled = true})
         Components.Healthbar_Outline = Framework:Draw("Square", {Thickness = 3, ZIndex = 1, Filled = true})
