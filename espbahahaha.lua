@@ -1,11 +1,3 @@
---[[------------------------------------------------
-|
-|    Library Made for IonHub (discord.gg/seU6gab)
-|    Developed by tatar0071#0627 and tested#0021
-|    IF YOU USE THIS, PLEASE CREDIT DEVELOPER(S)!
-|
---]]------------------------------------------------
-
 -- Services
 local Workspace = game:GetService("Workspace")
 local Camera = Workspace.CurrentCamera
@@ -154,7 +146,7 @@ function ESP:Get_Tool(Player)
             return Tool.Name
         end
     end
-    return "Hands"
+    return "Empty"
 end
 
 function ESP:Get_Health(Player)
