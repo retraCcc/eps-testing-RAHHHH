@@ -64,7 +64,7 @@ local ESP; ESP = {
         Distance = {Enabled = true, Position = "Bottom", Color = Color3.new(1, 1, 1), Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
         Tool = {Enabled = false, Position = "Right", Color = Color3.new(1, 1, 1), Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
         Health = {Enabled = true, Position = "Right", Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
-        Chams = {Enabled = false, Color = Color3.new(1, 1, 1), Mode = "Visible", OutlineColor = Color3.new(0, 0, 0), Transparency = 0.5, OutlineTransparency = 0},
+        Chams = {Enabled = false, Color = Color3.new(1, 1, 1), Mode = "Visible", OutlineColor = Color3.new(0, 0, 0), Transparency = 0.5, OutlineTransparency = 0}
     },
     Objects = {},
     Overrides = {}
@@ -216,8 +216,8 @@ do -- Player Metatable
                 HealthBold.Visible = false
                 if _G.chamsEnabled == true then
                     Chams.Enabled = false
+                    return
                 end
-                return
             end
             local Current_Health, Health_Maximum = ESP:Get_Health(self.Player), Humanoid.MaxHealth
             if Head and HumanoidRootPart and Current_Health > 0 then
@@ -502,8 +502,8 @@ do -- Player Metatable
                     HealthBold.Visible = false
                     if _G.chamsEnabled == true then
                         Chams.Enabled = false
-                    end
                     return
+                    end
                 end
             else
                 Box.Visible = false
@@ -520,8 +520,8 @@ do -- Player Metatable
                 HealthBold.Visible = false
                 if _G.chamsEnabled == true then
                     Chams.Enabled = false
+                    return
                 end
-                return
             end
         else
             Box.Visible = false
@@ -538,8 +538,8 @@ do -- Player Metatable
             HealthBold.Visible = false
             if _G.chamsEnabled == true then
                 Chams.Enabled = false
+                return
             end
-            return
         end
     end
 end
@@ -665,6 +665,6 @@ local Connection = RunService.RenderStepped:Connect(function()
     -- Object Updating
     for i, Object in pairs(ESP.Objects) do
         Object:Update()
-    end
+        end
     return ESP, Connection, Framework
 end)
