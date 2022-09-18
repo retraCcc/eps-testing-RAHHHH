@@ -90,7 +90,7 @@ local ESP; ESP = {
         Object_Maximal_Distance = 1000,
         Highlight = {Enabled = false, Color = Color3.new(1, 0, 0), Target = ""},
         Box = {Enabled = false, Color = Color3.new(1, 1, 1), Transparency = 0},
-        Box_Outline = {Enabled = false, Color = Color3.new(0, 0, 0), Transparency = 0, Outline_Size = 1},
+        Box_Outline = {Enabled = true, Color = Color3.new(0, 0, 0), Transparency = 0, Outline_Size = 1},
         Healthbar = {Enabled = false, Position = "Left", Color = Color3.new(1, 1, 1), Color_Lerp = Color3.fromRGB(40, 252, 3)},
         Name = {Enabled = false, Position = "Top", Color = Color3.new(1, 1, 1), Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
         Distance = {Enabled = false, Position = "Bottom", Color = Color3.new(1, 1, 1), Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
