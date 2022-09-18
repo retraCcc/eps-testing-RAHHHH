@@ -1,11 +1,3 @@
---[[------------------------------------------------
-|
-|    Library Made for IonHub (discord.gg/seU6gab)
-|    Developed by tatar0071#0627 and tested#0021
-|    IF YOU USE THIS, PLEASE CREDIT DEVELOPER(S)!
-|
---]]------------------------------------------------
-
 -- Services
 local Workspace = game:GetService("Workspace")
 local Camera = Workspace.CurrentCamera
@@ -55,36 +47,6 @@ local Framework = {}; Framework.__index = Framework; do
     end
 end
 
--- Main
-if not isfolder("ESP") then makefolder("ESP") end
-if not isfolder("ESP/assets") then makefolder("ESP/assets") end
-if not isfile("ESP/assets/taxi.oh") then
-    writefile("ESP/assets/taxi.oh", game:HttpGet("https://www.octohook.xyz/ionhub/esp_assets/taxi.png"))
-end
-if not isfile("ESP/assets/gorilla.oh") then
-    writefile("ESP/assets/gorilla.oh", game:HttpGet("https://www.octohook.xyz/ionhub/esp_assets/gorilla.png"))
-end
-if not isfile("ESP/assets/saul_goodman.oh") then
-    writefile("ESP/assets/saul_goodman.oh", game:HttpGet("https://www.octohook.xyz/ionhub/esp_assets/saul_goodman.png"))
-end
-if not isfile("ESP/assets/peter_griffin.oh") then
-    writefile("ESP/assets/peter_griffin.oh", game:HttpGet("https://www.octohook.xyz/ionhub/esp_assets/peter_griffin.png"))
-end
-if not isfile("ESP/assets/john_herbert.oh") then
-    writefile("ESP/assets/john_herbert.oh", game:HttpGet("https://www.octohook.xyz/ionhub/esp_assets/john_herbert.png"))
-end
-if not isfile("ESP/assets/fortnite.oh") then
-    writefile("ESP/assets/fortnite.oh", game:HttpGet("https://www.octohook.xyz/ionhub/esp_assets/fortnite.png"))
-end
-local Images = {
-    Taxi = readfile("ESP/assets/taxi.oh"),
-    Gorilla = readfile("ESP/assets/gorilla.oh"),
-    ["Saul Goodman"] = readfile("ESP/assets/saul_goodman.oh"),
-    ["Peter Griffin"] = readfile("ESP/assets/peter_griffin.oh"),
-    ["John Herbert"] = readfile("ESP/assets/john_herbert.oh"),
-    ["Fortnite"] = readfile("ESP/assets/fortnite.oh")
-}
-
 local ESP; ESP = {
     Settings = {
         Enabled = true,
@@ -102,26 +64,12 @@ local ESP; ESP = {
         Distance = {Enabled = true, Position = "Bottom", Color = Color3.new(1, 1, 1), Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
         Tool = {Enabled = false, Position = "Right", Color = Color3.new(1, 1, 1), Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
         Health = {Enabled = true, Position = "Right", Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
-        Chams = {Enabled = false, Color = Color3.new(1, 1, 1), Mode = "Visible", OutlineColor = Color3.new(0, 0, 0), Transparency = 0.5, OutlineTransparency = 0},
-        Image = {Enabled = false, Image = "Taxi", Raw = Images.Taxi},
-        China_Hat = {Enabled = false, Color = Color3.new(1, 1, 1), Transparency = 0.5, Height = 0.5, Radius = 1, Offset = 1}
+        Chams = {Enabled = false, Color = Color3.new(1, 1, 1), Mode = "Visible", OutlineColor = Color3.new(0, 0, 0), Transparency = 0.5, OutlineTransparency = 0}
     },
     Objects = {},
-    Overrides = {},
-    China_Hat = {}
+    Overrides = {}
 }
 ESP.__index = ESP
-
-function ESP:UpdateImages()
-    self.Settings.Image.Raw = Images[self.Settings.Image.Image]
-    for _, Object in pairs(self.Objects) do
-        for Index, Drawing in pairs(Object.Components) do
-            if Index == "Image" then
-                Drawing.Data = self.Settings.Image.Raw
-            end
-        end
-    end
-end
 
 function ESP:GetObject(Object)
     return self.Objects[Object]
@@ -247,7 +195,6 @@ do -- Player Metatable
         local Tool, ToolBold = self.Components.Tool, self.Components.ToolBold
         local Health, HealthBold = self.Components.Health, self.Components.HealthBold
         local Chams = _G.chamsEnabled == true and self.Components.Chams or true
-        local Image = self.Components.Image
         if Box == nil or Box_Outline == nil or Healthbar == nil or Healthbar_Outline == nil or Name == nil or NameBold == nil or Distance == nil or DistanceBold == nil or Tool == nil or ToolBold == nil or Health == nil or HealthBold == nil or Chams == nil then
             self:Destroy()
         end
@@ -270,7 +217,6 @@ do -- Player Metatable
                 if _G.chamsEnabled == true then
                     Chams.Enabled = false
                 end
-                Image.Visible = false
                 return
             end
             local Current_Health, Health_Maximum = ESP:Get_Health(self.Player), Humanoid.MaxHealth
@@ -337,14 +283,6 @@ do -- Player Metatable
                     Box_Outline.Thickness = Box_Outline_Settings.Outline_Size + 2
                     Box_Outline.Transparency = Framework:Drawing_Transparency(Box_Outline_Settings.Transparency)
                     Box_Outline.Visible = Box_Settings.Enabled and Box_Outline_Settings.Enabled or false
-
-                    local Image_Settings = ESP.Settings.Image
-                    local Image_Enabled = Image_Settings.Enabled
-                    if Image_Enabled then
-                        Image.Size = -Box_Size
-                        Image.Position = Box_Position + Box_Size
-                    end
-                    Image.Visible = Image_Enabled
 
                     -- Healthbar
                     local Health_Top_Size_Outline = Vector2.new(Box_Size.X - 4, 3)
@@ -565,7 +503,6 @@ do -- Player Metatable
                     if _G.chamsEnabled == true then
                         Chams.Enabled = false
                     end
-                    Image.Visible = false
                     return
                 end
             else
@@ -584,7 +521,6 @@ do -- Player Metatable
                 if _G.chamsEnabled == true then
                     Chams.Enabled = false
                 end
-                Image.Visible = false
                 return
             end
         else
@@ -603,7 +539,6 @@ do -- Player Metatable
             if _G.chamsEnabled == true then
                 Chams.Enabled = false
             end
-            Image.Visible = false
             return
         end
     end
@@ -685,7 +620,6 @@ do -- ESP Functions
         Components.Health = Framework:Draw("Text", {Font = 2, Size = 13, Outline = true, Center = true})
         Components.HealthBold = Framework:Draw("Text", {Font = 2, Size = 13, Center = true})
         Components.Chams = _G.chamsEnabled == true and Framework:Instance("Highlight", {Parent = CoreGui, DepthMode = Enum.HighlightDepthMode.AlwaysOnTop}) or true
-        Components.Image = Framework:Draw("Image", {Data = self.Settings.Image.Raw})
         self.Objects[Instance] = Object
         return Object
     end
@@ -726,51 +660,11 @@ do -- ESP Functions
     end
 end
 
--- China Hat
-for i = 1, 30 do
-    ESP.China_Hat[i] = {Framework:Draw('Line', {Visible = false}), Framework:Draw('Triangle', {Visible = false})}
-    ESP.China_Hat[i][1].ZIndex = 2;
-    ESP.China_Hat[i][1].Thickness = 2;
-    ESP.China_Hat[i][2].ZIndex = 1;
-    ESP.China_Hat[i][2].Filled = true;
-end
-
 -- Render Connection
 local Connection = RunService.RenderStepped:Connect(function()
     -- Object Updating
     for i, Object in pairs(ESP.Objects) do
         Object:Update()
     end
-
-    -- China Hat
-    local China_Hat_Settings = ESP.Settings.China_Hat
-    if ESP.Settings.China_Hat.Enabled then
-        local China_Hat = ESP.China_Hat
-        for i = 1, #ESP.China_Hat do
-            local Line, Triangle = China_Hat[i][1], China_Hat[i][2];
-            if LocalPlayer.Character ~= nil and LocalPlayer.Character:FindFirstChild('Head') and LocalPlayer.Character.Humanoid.Health > 0 then
-                local Position = LocalPlayer.Character.Head.Position + Vector3.new(0, China_Hat_Settings.Offset, 0);
-                local Last, Next = (i / 30) * math.pi*2, ((i + 1) / 30) * math.pi*2;
-                local lastScreen, onScreenLast = Camera:WorldToViewportPoint(Position + (Vector3.new(math.cos(Last), 0, math.sin(Last)) * China_Hat_Settings.Radius));
-                local nextScreen, onScreenNext = Camera:WorldToViewportPoint(Position + (Vector3.new(math.cos(Next), 0, math.sin(Next)) * China_Hat_Settings.Radius));
-                local topScreen, onScreenTop = Camera:WorldToViewportPoint(Position + Vector3.new(0, China_Hat_Settings.Height, 0));
-                if not onScreenLast or not onScreenNext or not onScreenTop then
-                    Line.Transparency = 0
-                    Triangle.Transparency = 0
-                    continue
-                end
-                Line.From = Vector2.new(lastScreen.X, lastScreen.Y);
-                Line.To = Vector2.new(nextScreen.X, nextScreen.Y);
-                Line.Color = China_Hat_Settings.Color
-                Line.Transparency = Framework:Drawing_Transparency(China_Hat_Settings.Transparency)
-                Triangle.PointA = Vector2.new(topScreen.X, topScreen.Y);
-                Triangle.PointB = Line.From;
-                Triangle.PointC = Line.To;
-                Triangle.Color = China_Hat_Settings.Color
-                Triangle.Transparency = Framework:Drawing_Transparency(China_Hat_Settings.Transparency)
-            end
-        end
-    end
+    return ESP, Connection, Framework
 end)
-
-return ESP, Connection, Framework
