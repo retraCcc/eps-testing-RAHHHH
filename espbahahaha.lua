@@ -665,6 +665,7 @@ local Connection = RunService.RenderStepped:Connect(function()
     -- Object Updating
     for i, Object in pairs(ESP.Objects) do
         Object:Update()
-        end
-    return ESP, Connection, Framework
+    end
 end)
+
+return ESP, Connection, Framework
