@@ -81,7 +81,7 @@ local Images = {
 
 local ESP; ESP = {
     Settings = {
-        Enabled = false,
+        Enabled = true,
         Bold_Text = false,
         Objects_Enabled = false,
         Team_Check = false,
