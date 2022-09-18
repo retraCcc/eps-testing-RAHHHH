@@ -89,7 +89,7 @@ local ESP; ESP = {
         Maximal_Distance = 1000,
         Object_Maximal_Distance = 1000,
         Highlight = {Enabled = false, Color = Color3.new(1, 0, 0), Target = ""},
-        Box = {Enabled = false, Color = Color3.new(1, 1, 1), Transparency = 0},
+        Box = {Enabled = false, Color = Color3.new(1, 1, 1), Transparency = 0, Filled = _G.BoxFilled},
         Box_Outline = {Enabled = true, Color = Color3.new(0, 0, 0), Transparency = 0, Outline_Size = 1},
         Healthbar = {Enabled = false, Position = "Left", Color = Color3.new(1, 1, 1), Color_Lerp = Color3.fromRGB(40, 252, 3)},
         Name = {Enabled = false, Position = "Top", Color = Color3.new(1, 1, 1), Transparency = 0, OutlineColor = Color3.new(0, 0, 0)},
@@ -664,7 +664,7 @@ do -- ESP Functions
             self:GetObject(Instance):Destroy()
         end
         local Components = Object.Components
-        Components.Box = Framework:Draw("Square", {Thickness = 1, ZIndex = 2, Filled = _G.BoxFilled})
+        Components.Box = Framework:Draw("Square", {Thickness = 1, ZIndex = 2})
         Components.Box_Outline = Framework:Draw("Square", {Thickness = 3, ZIndex = 1})
         Components.Healthbar = Framework:Draw("Square", {Thickness = 1, ZIndex = 2, Filled = true})
         Components.Healthbar_Outline = Framework:Draw("Square", {Thickness = 3, ZIndex = 1, Filled = true})
