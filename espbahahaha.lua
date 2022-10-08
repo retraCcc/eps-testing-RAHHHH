@@ -1391,7 +1391,7 @@ do
         local toggle__gradient = utility:Create("Image", {Vector2.new(0,0), toggle_frame}, {
             Size = utility:Size(1, 0, 1, 0, toggle_frame),
             Position = utility:Position(0, 0, 0 , 0, toggle_frame),
-            Transparency = 0.5,
+            Transparency = 0.3,
             Visible = page.open
         }, section.visibleContent)
         --
@@ -1405,7 +1405,7 @@ do
             Visible = page.open
         }, section.visibleContent)
         --
-        utility:LoadImage(toggle__gradient, "gradient", "https://i.imgur.com/5hmlrjX.png")
+        utility:LoadImage(toggle__gradient, "gradient1", "https://i.imgur.com/4rMD306.png")
         --
         function toggle:Get()
             return toggle.current
