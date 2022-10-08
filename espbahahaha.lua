@@ -1391,7 +1391,7 @@ do
         local toggle__gradient = utility:Create("Image", {Vector2.new(0,0), toggle_frame}, {
             Size = utility:Size(1, 0, 1, 0, toggle_frame),
             Position = utility:Position(0, 0, 0 , 0, toggle_frame),
-            Transparency = 0,
+            Transparency = 1,
             Visible = page.open
         }, section.visibleContent)
         --
