@@ -435,8 +435,18 @@ do
             Position = utility:Position(0, 1, 0, 1, tab_frame_inline2),
             Color = theme.light_contrast
         });window["tab_frame"] = tab_frame
+	--
+        function window:GetConfig(name)
+            if isfile('splix/configs/'..name..'.json') then
+                return readfile('splix/configs/'..name..'.json');
+            end
+        end
         --
-        function window:GetConfig()
+        function window:SaveConfig(name)
+	  if not self:GetConfig(name) then 
+	        print("Failed config")
+	        return
+	    end
             local config = {}
             --
             for i,v in pairs(library.pointers) do
@@ -448,7 +458,7 @@ do
                 end
             end
             --
-            return game:GetService("HttpService"):JSONEncode(config)
+            return writefile('splix/configs/'..name..'.json', game:GetService("HttpService"):JSONEncode(config))
         end
         --
         function window:LoadConfig(config)
@@ -460,7 +470,7 @@ do
                 end
             end
         end
-        --
+	--
         function window:Move(vector)
             for i,v in pairs(library.drawings) do
                 if v[2][2] then
